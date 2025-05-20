@@ -15,17 +15,48 @@ const SignUp = () => {
     setError("");
     setLoading(true);
     
-    const form = e.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const photoURL = form.photo.value;
-    const password = form.password.value;
+    const form= e.target;
+    const formData = new FormData(form);
+    const {email, password ,...restFormData}=Object.fromEntries(formData.entries());
     
     createUser(email, password)
       .then(result => {
+         
+
+      const userProfile ={
+      email,
+      ...restFormData,
+      creationTime: result.user?.metadata?.creationTime,
+      lastSignInTime: result.user?.metadata?.lastSignInTime,
+
+      }
+       console.log(email, password, userProfile)
+       
+       fetch('http://localhost:3000/users',{
+        method:'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body: JSON.stringify(userProfile)
+       })
+       .then(res =>res.json())
+       .then(data=>{
+        console.log(data)
+        if (data.insertedId) {
+          Swal.fire({
+          title: "user added successfully",
+          icon: "success",
+          draggable: true
+          });
+          navigate("/");
+        }
+       })
+        
+
+        console.log(result.user)
         return updateProfile(result.user, {
-          displayName: name,
-          photoURL: photoURL || "https://ui-avatars.com/api/?name=" + name
+          displayName: Name,
+          photoURL: photoURL || "https://ui-avatars.com/api/?name=" + Name
         }).then(() => {
           console.log("Profile updated successfully");
           form.reset();
@@ -84,7 +115,7 @@ const SignUp = () => {
             </label>
             <input 
               type="text" 
-              name="name" 
+              name="Name" 
               className="input input-bordered" 
               placeholder="Full Name"
               required 
@@ -153,7 +184,7 @@ const SignUp = () => {
         
         <p className="text-center mt-4">
           Already have an account?{" "}
-          <Link to="/signin" className="text-blue-600 hover:underline">
+          <Link to="/signin" className="text-blue-700 hover:underline">
             Sign In
           </Link>
         </p>

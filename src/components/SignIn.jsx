@@ -100,7 +100,7 @@ const SignIn = () => {
           
           <div className="form-control mt-6">
             <button 
-              className="btn w-full bg-black text-white" 
+              className="btn w-full bg-green-900 text-white" 
               disabled={loading}
             >
               {loading ? "Signing in..." : "Sign In with Email"}
