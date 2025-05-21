@@ -55,7 +55,7 @@ const Header = () => {
               <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
             </li>
             <li><Link to="/browselisting">Browse Listing</Link></li>
-            {user && <li><Link to="/mylistings">My Listings</Link></li>}
+            {user && <li><Link to="/mylisting">My Listings</Link></li>}
           </ul>
         </div>
         <Link to="/" className="font-extrabold text-2xl">Roomies</Link>
@@ -68,7 +68,7 @@ const Header = () => {
             <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
           </li>
           <li><Link to="/browselisting">Browse Listing</Link></li>
-          {user && <li><Link to="/mylistings">My Listings</Link></li>}
+          {user && <li><Link to="/mylisting">My Listings</Link></li>}
         </ul>
       </div>
       

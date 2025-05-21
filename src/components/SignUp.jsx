@@ -83,7 +83,7 @@ const SignUp = () => {
       .then(result => {
         console.log("Google sign in successful:", result.user);
         
-        // Create a user profile for Google sign-in users too
+        
         const userProfile = {
           email: result.user.email,
           Name: result.user.displayName,
@@ -92,22 +92,46 @@ const SignUp = () => {
           lastSignInTime: result.user?.metadata?.lastSignInTime,
         }
         
-        // Check if user already exists before adding to database
-        fetch('http://localhost:3000/users', {
-          method: 'POST',
+        fetch(`http://localhost:3000/users/${result.user.email}`, {
+          method: 'GET',
           headers: {
             'content-type': 'application/json'
-          },
-          body: JSON.stringify(userProfile)
+          }
         })
         .then(res => res.json())
         .then(data => {
+          
+          if (!data.exists) {
+            return fetch('http://localhost:3000/users', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify(userProfile)
+            });
+          } else {
+            
+            return fetch(`http://localhost:3000/users/${result.user.email}`, {
+              method: 'PATCH',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify({ 
+                lastSignInTime: result.user?.metadata?.lastSignInTime 
+              })
+            });
+          }
+        })
+        .then(res => {
+          if (res) return res.json();
+          return null;
+        })
+        .then(data => {
           console.log("User data response:", data);
-          // No need to show another success message as we're already showing one below
         })
         .catch(err => {
-          console.error("Error saving Google user to database:", err);
-          // Continue with sign-in even if database save fails
+          console.error("Error handling Google user in database:", err);
+         
         });
         
         Swal.fire({

@@ -15,6 +15,7 @@ import AuthProvider from './context/AuthProvider.jsx';
 import BrowseListing from './components/BrowseListing.jsx';
 import RoomDetails from './components/RoomDetails.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
+import MyListings from './components/Mylisting.jsx';
 
 
 
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
         path:"roommates/:id",
         loader:({params})=>fetch(`http://localhost:3000/roommates/${params.id}`),
         Component:RoomDetails
+      },
+      {
+        path:"mylisting",
+        loader:({params})=>fetch(`http://localhost:3000/roommates`),
+        Component:MyListings
       },
       {
         path:"signin",
