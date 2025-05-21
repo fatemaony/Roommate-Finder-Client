@@ -14,6 +14,7 @@ import FindRoomMate from './components/FindRoomMate.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
 import BrowseListing from './components/BrowseListing.jsx';
 import RoomDetails from './components/RoomDetails.jsx';
+import ErrorPage from './components/ErrorPage.jsx';
 
 
 
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     children:[
       {
         index:true,
+        loader:()=>fetch("http://localhost:3000/roommates"),
         Component:Home
       },
       {
@@ -51,6 +53,11 @@ const router = createBrowserRouter([
       }
     ]
   },
+   {
+        path:"/*" ,
+        Component:ErrorPage
+
+   }
 ]);
 
 createRoot(document.getElementById('root')).render(
