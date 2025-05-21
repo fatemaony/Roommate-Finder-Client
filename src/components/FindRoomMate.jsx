@@ -1,78 +1,46 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router";
-const FindRoomMate =()=>{
 
+const FindRoomMate = () => {
   const { user } = useContext(AuthContext);
-  // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const authCheckPerformed = useRef(false);
 
-
-
-    useEffect(() => {
-    if (!user) {
-      Swal.fire({
-        title: "Authentication Required",
-        text: "Please sign in to post a roommate listing",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sign In",
-        cancelButtonText: "Cancel"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/signin");
-        } else {
-          navigate("/");
-        }
-      });
-    }
-  }, [user, navigate]);
-
-  const handleFindRoommate = (e)=>{
+  const handleFindRoommate = (e) => {
     e.preventDefault();
-     if (!user) {
-      Swal.fire({
-        title: "Authentication Required",
-        text: "Please sign in to post a roommate listing",
-        icon: "warning",
-        confirmButtonText: "Sign In"
-      }).then(() => {
-        navigate("/signin");
-      });
-      return;
-    }
-    const form =e.target;
+  
+    const form = e.target;
     const formData = new FormData(form);
-    const newRoommate =Object.fromEntries(formData.entries());
-    console.log(newRoommate)
+    const newRoommate = Object.fromEntries(formData.entries());
+    console.log(newRoommate);
 
     // send data to the server
-
-  fetch('http://localhost:3000/roommates', {
-  method: "POST",
-  headers: {
-    'content-type': 'application/json'
-  },
-  body:JSON.stringify(newRoommate)
-})
-.then(res => res.json())
-.then(data => {
-  if (data.insertedId) {
-    console.log(data)
-   
-    Swal.fire({
-    title: "Post roommate listing successfully!",
-    icon: "success",
-    draggable: true
-   });
+    fetch('http://localhost:3000/roommates', {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(newRoommate)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.insertedId) {
+        console.log(data);
+       
+        Swal.fire({
+          title: "Post roommate listing successfully!",
+          icon: "success",
+          draggable: true
+        });
+      }
+    });
+  
   }
-});
 
-
-  }
   return(
-      <div className="px-5 md:px-24">
+    <div className="px-5 md:px-24">
       <div className="p-5 md:p-12 text-center space-y-4">
         <h1 className="text-xl md:text-3xl font-bold">Looking for a roommate!</h1>
         <p className="text-gray-600">Post your details to find the perfect roommate match</p>
@@ -80,6 +48,32 @@ const FindRoomMate =()=>{
 
       <form onSubmit={handleFindRoommate}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Read-only user email field */}
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+            <label className="label font-medium">User Email</label>
+            <input 
+              type="email" 
+              name="userEmail" 
+              className="input input-bordered w-full bg-gray-100" 
+              value={user?.email || ""} 
+              readOnly 
+            />
+            <span className="text-xs text-gray-500 mt-1">This field cannot be edited</span>
+          </fieldset>
+          
+          {/* Read-only user name field */}
+          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+            <label className="label font-medium">User Name </label>
+            <input 
+              type="text" 
+              name="userName" 
+              className="input input-bordered w-full bg-gray-100" 
+              value={user?.displayName || ""} 
+              readOnly 
+            />
+            <span className="text-xs text-gray-500 mt-1">This field cannot be edited</span>
+          </fieldset>
+
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Location*</label>
             <input 
@@ -138,19 +132,19 @@ const FindRoomMate =()=>{
           </fieldset>
           
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Previous Location</label>
+            <label className="label font-medium">Amenities</label>
             <input 
               type="text" 
-              name="previousLocation" 
+              name="amenities" 
               className="input input-bordered w-full" 
-              placeholder="Where you lived before (optional)" 
+              placeholder="Wi-Fi, Parking, Laundry, etc." 
             />
           </fieldset>
           
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Contact Info*</label>
             <input 
-              type="text" 
+              type="text"
               name="contact" 
               className="input input-bordered w-full" 
               placeholder="Phone, Email, or preferred contact method" 
@@ -168,16 +162,16 @@ const FindRoomMate =()=>{
               required 
             />
           </fieldset>
-          
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Amenities</label>
+            <label className="label font-medium">Room Picture</label>
             <input 
               type="text" 
-              name="amenities" 
+              name="photo" 
               className="input input-bordered w-full" 
-              placeholder="Wi-Fi, Parking, Laundry, etc." 
+              placeholder="photo URL" 
             />
           </fieldset>
+          
         </div>
 
         <button 
@@ -188,6 +182,7 @@ const FindRoomMate =()=>{
         </button>
       </form>
     </div>
-  )
+  );
 };
+
 export default FindRoomMate;

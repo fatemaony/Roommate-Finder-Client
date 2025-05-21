@@ -15,48 +15,45 @@ const SignUp = () => {
     setError("");
     setLoading(true);
     
-    const form= e.target;
+    const form = e.target;
     const formData = new FormData(form);
-    const {email, password ,...restFormData}=Object.fromEntries(formData.entries());
+    const {email, password, Name, photo, ...restFormData} = Object.fromEntries(formData.entries());
     
     createUser(email, password)
       .then(result => {
-         
-
-      const userProfile ={
-      email,
-      ...restFormData,
-      creationTime: result.user?.metadata?.creationTime,
-      lastSignInTime: result.user?.metadata?.lastSignInTime,
-
-      }
-       console.log(email, password, userProfile)
-       
-       fetch('http://localhost:3000/users',{
-        method:'POST',
-        headers:{
-          'content-type':'application/json'
-        },
-        body: JSON.stringify(userProfile)
-       })
-       .then(res =>res.json())
-       .then(data=>{
-        console.log(data)
-        if (data.insertedId) {
-          Swal.fire({
-          title: "user added successfully",
-          icon: "success",
-          draggable: true
-          });
-          navigate("/");
+        const userProfile = {
+          email,
+          Name,
+          photo,
+          ...restFormData,
+          creationTime: result.user?.metadata?.creationTime,
+          lastSignInTime: result.user?.metadata?.lastSignInTime,
         }
-       })
+        console.log(email, password, userProfile)
+       
+        fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userProfile)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if (data.insertedId) {
+            Swal.fire({
+              title: "User added successfully",
+              icon: "success",
+              draggable: true
+            });
+          }
+        })
         
-
         console.log(result.user)
         return updateProfile(result.user, {
           displayName: Name,
-          photoURL: photoURL || "https://ui-avatars.com/api/?name=" + Name
+          photoURL: photo || "https://ui-avatars.com/api/?name=" + encodeURIComponent(Name)
         }).then(() => {
           console.log("Profile updated successfully");
           form.reset();
@@ -85,6 +82,33 @@ const SignUp = () => {
     signInWithGoogle()
       .then(result => {
         console.log("Google sign in successful:", result.user);
+        
+        // Create a user profile for Google sign-in users too
+        const userProfile = {
+          email: result.user.email,
+          Name: result.user.displayName,
+          photo: result.user.photoURL,
+          creationTime: result.user?.metadata?.creationTime,
+          lastSignInTime: result.user?.metadata?.lastSignInTime,
+        }
+        
+        // Check if user already exists before adding to database
+        fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userProfile)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("User data response:", data);
+          // No need to show another success message as we're already showing one below
+        })
+        .catch(err => {
+          console.error("Error saving Google user to database:", err);
+          // Continue with sign-in even if database save fails
+        });
         
         Swal.fire({
           title: "Signed In Successfully with Google",

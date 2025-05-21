@@ -46,11 +46,39 @@ const SignIn = () => {
     signInWithGoogle()
       .then(result => {
         console.log("Google sign in successful:", result.user);
+        
+        // Create a user profile for Google sign-in users
+        const userProfile = {
+          email: result.user.email,
+          Name: result.user.displayName,
+          photo: result.user.photoURL,
+          creationTime: result.user?.metadata?.creationTime,
+          lastSignInTime: result.user?.metadata?.lastSignInTime,
+        }
+        
+        // Save Google user to database
+        fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userProfile)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log("User data response:", data);
+          
+        })
+        .catch(err => {
+          console.error("Error saving Google user to database:", err);
+         
+        });
+        
         Swal.fire({
-        title: "Logged in Successfully",
-        icon: "success",
-        draggable: true
-});
+          title: "Logged in Successfully",
+          icon: "success",
+          draggable: true
+        });
         navigate("/"); 
       })
       .catch(error => {
