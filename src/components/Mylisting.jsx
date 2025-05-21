@@ -3,16 +3,35 @@ import { Link, useLoaderData } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 
 const MyListings = () => {
-  const listings = useLoaderData(); // should be an array of roommate posts
+  const listings = useLoaderData(); 
   const { user } = useContext(AuthContext);
   const userEmail = user?.email;
 
-  // ❗ Corrected filter logic
+  
   const myListings = listings.filter(listing => listing.userEmail === userEmail);
 
-  const handleDelete = (id) => {
-    // Implement delete logic here
-    console.log("Delete ID:", id);
+  const handleDelete = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    })
+    // .then(result =>{
+    //   if (result.isConfirmed) {
+    //     fetch(`http://localhost:3000/roommates/${listings._id}`, {
+    //       method: "DELETE"
+    //     })
+    //     .then(res => res.json())
+    //     .then(data=>{
+    //       console.log(data)
+    //     })
+        
+    //   }
+    // })
   };
 
   return (
@@ -47,13 +66,13 @@ const MyListings = () => {
                   <td className="py-3 px-4 border-b">{listing.contact}</td>
                   <td className="py-3 px-4 border-b flex justify-center space-x-2">
                     <Link
-                      to={`/update-listing/${listing._id}`}
+                      to={`/update/${listing._id}`}
                       className="bg-blue-500 text-white px-3 py-1 rounded"
                     >
                       Update
                     </Link>
                     <button
-                      onClick={() => handleDelete(listing._id)}
+                      onClick={() => handleDelete()}
                       className="bg-red-500 text-white px-3 py-1 rounded"
                     >
                       Delete
