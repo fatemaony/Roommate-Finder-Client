@@ -25,7 +25,7 @@ const RoomDetails = () => {
       </p>
 
       <div className="flex flex-col md:flex-row gap-6 items-center">
-        
+        {/* Image */}
         <div className="w-full md:w-1/2">
           <img
             className="w-full h-60 object-cover rounded-md"

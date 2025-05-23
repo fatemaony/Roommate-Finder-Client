@@ -33,7 +33,7 @@ const SignUp = () => {
         }
         console.log(email, password, userProfile)
        
-        fetch('http://localhost:3000/users', {
+        fetch('https://roommate-server-kappa.vercel.app/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -94,7 +94,7 @@ const SignUp = () => {
           lastSignInTime: result.user?.metadata?.lastSignInTime,
         }
         
-        fetch(`http://localhost:3000/users/${result.user.email}`, {
+        fetch(`https://roommate-server-kappa.vercel.app/users/${result.user.email}`, {
           method: 'GET',
           headers: {
             'content-type': 'application/json'
@@ -104,7 +104,7 @@ const SignUp = () => {
         .then(data => {
           
           if (!data.exists) {
-            return fetch('http://localhost:3000/users', {
+            return fetch('https://roommate-server-kappa.vercel.app/users', {
               method: 'POST',
               headers: {
                 'content-type': 'application/json'
@@ -113,7 +113,7 @@ const SignUp = () => {
             });
           } else {
             
-            return fetch(`http://localhost:3000/users/${result.user.email}`, {
+            return fetch(`https://roommate-server-kappa.vercel.app/users/${result.user.email}`, {
               method: 'PATCH',
               headers: {
                 'content-type': 'application/json'

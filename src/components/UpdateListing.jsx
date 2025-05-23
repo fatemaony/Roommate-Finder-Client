@@ -36,7 +36,7 @@ const UpdateListing = () => {
     e.preventDefault();
     
     // Send update to db
-    fetch(`http://localhost:3000/roommates/${listing._id}`, {
+    fetch(`https://roommate-server-kappa.vercel.app/roommates/${listing._id}`, {
       method: "PUT",
       headers: {
         'content-type': 'application/json'

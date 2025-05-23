@@ -17,7 +17,7 @@ const FindRoomMate = () => {
     console.log(newRoommate);
 
     // send data to the server
-    fetch('http://localhost:3000/roommates', {
+    fetch('https://roommate-server-kappa.vercel.app/roommates', {
       method: "POST",
       headers: {
         'content-type': 'application/json'

@@ -34,7 +34,7 @@ const MyListings = () => {
     setIsDeleting(listingId);
 
     try {
-      const response = await fetch(`http://localhost:3000/roommates/${listingId}`, {
+      const response = await fetch(`https://roommate-server-kappa.vercel.app/roommates/${listingId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
