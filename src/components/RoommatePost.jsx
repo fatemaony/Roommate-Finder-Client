@@ -14,7 +14,7 @@ const RoommatePost = () => {
       <h2 className="text-center text-2xl lg:text-4xl font-bold text-gray-700 mb-8">
         Available Roommates
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90%] mx-auto mt-6 shadow">
         {
           availableRoommates.map(roommate => 
             <RoommateCard 

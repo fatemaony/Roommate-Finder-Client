@@ -9,14 +9,9 @@ import FAQ from "./Faq";
   return(
     <div>
       <Banner/>
-    <div className="m-20">
-  
-      
-       <RoommatePost/>
-      
-    </div>
-    <HowWorks/>
-   <FAQ/>
+      <RoommatePost/>
+      <HowWorks/>
+      <FAQ/>
     </div>
   )
  };
