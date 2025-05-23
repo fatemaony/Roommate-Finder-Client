@@ -40,7 +40,7 @@ const FindRoomMate = () => {
   }
 
   return(
-    <div className="px-5 md:px-24">
+    <div className="px-5 md:px-24 text-black">
       <div className="p-5 md:p-12 text-center space-y-4">
         <h1 className="text-xl md:text-3xl font-bold">Looking for a roommate!</h1>
         <p className="text-gray-600">Post your details to find the perfect roommate match</p>
@@ -48,33 +48,33 @@ const FindRoomMate = () => {
 
       <form onSubmit={handleFindRoommate}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Read-only user email field */}
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">User Email</label>
             <input 
               type="email" 
               name="userEmail" 
-              className="input input-bordered w-full bg-gray-100" 
+              className="input input-bordered w-full bg-gray-200" 
               value={user?.email || ""} 
               readOnly 
             />
             <span className="text-xs text-gray-500 mt-1">This field cannot be edited</span>
           </fieldset>
           
-          {/* Read-only user name field */}
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">User Name </label>
             <input 
               type="text" 
               name="userName" 
-              className="input input-bordered w-full bg-gray-100" 
+              className="input input-bordered w-full bg-gray-200" 
               value={user?.displayName || ""} 
               readOnly 
             />
             <span className="text-xs text-gray-500 mt-1">This field cannot be edited</span>
           </fieldset>
 
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Location*</label>
             <input 
               type="text" 
@@ -85,7 +85,7 @@ const FindRoomMate = () => {
             />
           </fieldset>
           
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Rent Amount*</label>
             <input 
               type="text" 
@@ -96,7 +96,7 @@ const FindRoomMate = () => {
             />
           </fieldset>
           
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Room Type</label>
             <select name="roomType" className="select bg-white input-bordered w-full">
               <option value="Single">Single</option>
@@ -108,7 +108,7 @@ const FindRoomMate = () => {
             </select>
           </fieldset>
           
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Lifestyle Preferences</label>
             <select name="lifestyle" className="select bg-white input-bordered w-full">
               <option value="No Preference">No Preference</option>
@@ -121,7 +121,7 @@ const FindRoomMate = () => {
             </select>
           </fieldset>
           
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4 md:col-span-2">
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4 md:col-span-2">
             <label className="label font-medium">Description*</label>
             <textarea 
               name="description" 
@@ -131,7 +131,7 @@ const FindRoomMate = () => {
             ></textarea>
           </fieldset>
           
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Amenities</label>
             <input 
               type="text" 
@@ -141,7 +141,7 @@ const FindRoomMate = () => {
             />
           </fieldset>
           
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Contact Info*</label>
             <input 
               type="text"
@@ -152,17 +152,15 @@ const FindRoomMate = () => {
             />
           </fieldset>
           
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset bg-base-200 text-gray-500 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Availability*</label>
-            <input 
-              type="text" 
-              name="availability" 
-              className="input input-bordered w-full" 
-              placeholder="When the room is available (e.g. June 1st, 2025)" 
-              required 
-            />
+            <select name="availability" className="select bg-white input-bordered w-full" required>
+              <option value="">Select availability</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
           </fieldset>
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset text-gray-500 bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Room Picture</label>
             <input 
               type="text" 

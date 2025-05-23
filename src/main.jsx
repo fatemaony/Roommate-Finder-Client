@@ -29,6 +29,7 @@ const router = createBrowserRouter([
       {
         index:true,
         loader:()=>fetch("http://localhost:3000/roommates"),
+        
         Component:Home
       },
       {

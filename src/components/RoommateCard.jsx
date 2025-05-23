@@ -34,7 +34,7 @@ const RoommateCard = ({ roommate, roommates, setRoommates }) => {
       <div className="card-body">
         <h2 className="card-title">Location: {location}</h2>
         <p>Available from: {availability}</p>
-        <p>Rent Amount: ${rent}</p>
+        <p>Rent Amount: {rent}tk</p>
         <div className="card-actions justify-end">
           
           <button onClick={handleSeeMore} className="btn btn-primary">

@@ -91,22 +91,22 @@ const MyListings = () => {
         <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
           <thead className="bg-gray-100">
             <tr>
-              <th className="py-3 px-4 border-b text-left">Location</th>
-              <th className="py-3 px-4 border-b text-left">Rent</th>
-              <th className="py-3 px-4 border-b text-left">Room Type</th>
-              <th className="py-3 px-4 border-b text-left">Contact</th>
-              <th className="py-3 px-4 border-b text-center">Actions</th>
+              <th className="py-3 px-4 text-black border-b text-left">Location</th>
+              <th className="py-3 px-4  text-black border-b text-left">Rent</th>
+              <th className="py-3 px-4  text-black border-b text-left">Room Type</th>
+              <th className="py-3 px-4  text-black border-b text-left">Contact</th>
+              <th className="py-3 px-4  text-black border-b text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {myListings.length > 0 ? (
               myListings.map((listing) => (
                 <tr key={listing._id} className="hover:bg-gray-50">
-                  <td className="py-3 px-4 border-b">{listing.location}</td>
-                  <td className="py-3 px-4 border-b">${listing.rent}</td>
-                  <td className="py-3 px-4 border-b">{listing.roomType}</td>
-                  <td className="py-3 px-4 border-b">{listing.contact}</td>
-                  <td className="py-3 px-4 border-b flex justify-center space-x-2">
+                  <td className="py-3 px-4  text-black border-b">{listing.location}</td>
+                  <td className="py-3 px-4  text-black border-b">${listing.rent}</td>
+                  <td className="py-3 px-4  text-black border-b">{listing.roomType}</td>
+                  <td className="py-3 px-4  text-black border-b">{listing.contact}</td>
+                  <td className="py-3 px-4  text-black border-b flex justify-center space-x-2">
                     <Link
                       to={`/update/${listing._id}`}
                       className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors"

@@ -25,7 +25,7 @@ const RoomDetails = () => {
       </p>
 
       <div className="flex flex-col md:flex-row gap-6 items-center">
-        {/* Image */}
+        
         <div className="w-full md:w-1/2">
           <img
             className="w-full h-60 object-cover rounded-md"
@@ -35,25 +35,25 @@ const RoomDetails = () => {
         </div>
 
         <div className="w-full md:w-1/2 space-y-3">
-          <p className="font-bold text-2xl">
+          <p className="font-bold text-2xl text-black">
             Location: <span className="font-normal">{details.location}</span>
           </p>
-          <p><span className="font-semibold">Rent:</span> {details.rent}</p>
-          <p><span className="font-semibold">Room Type:</span> {details.roomType}</p>
-          <p><span className="font-semibold">Lifestyle:</span> {details.lifestyle}</p>
-          <p><span className="font-semibold">Availability:</span> {details.availability}</p>
+          <p className="text-black"><span className="font-semibold">Rent:</span> {details.rent}</p>
+          <p className="text-black"><span className="font-semibold">Room Type:</span> {details.roomType}</p>
+          <p className="text-black"><span className="font-semibold">Lifestyle:</span> {details.lifestyle}</p>
+          <p className="text-black"><span className="font-semibold">Availability:</span> {details.availability}</p>
 
         
           <div className="mt-5">
             <button
               onClick={handleLike}
-              disabled={liked}
-              className={`flex items-center gap-2 px-4 py-2 border rounded-md transition duration-200 ${
-                liked ? "bg-blue-100 cursor-not-allowed" : "hover:bg-gray-100"
+              
+              className={`flex items-center text-black gap-2 px-4 py-2 border rounded-md transition duration-200 ${
+                liked ? "bg-blue-100 cursor-not-allowed" : "hover:bg-gray-700"
               }`}
             >
               {liked ? (
-                <AiFillLike size={25} className="text-blue-500" />
+                <AiFillLike size={25} className="text-black" />
               ) : (
                 <AiOutlineLike size={25} />
               )}
@@ -62,7 +62,7 @@ const RoomDetails = () => {
 
          
             {liked && (
-              <p className="mt-3 text-sm text-gray-700 flex items-center gap-1">
+              <p className="mt-3 text-sm text-gray-900 flex items-center gap-1">
                 <MdAddIcCall size={18} /> 
                 <span className="font-semibold">Contact:</span> {details.contact}
               </p>

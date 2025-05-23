@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import { Eye, EyeOff } from "lucide-react";
 import Swal from "sweetalert2";
 
 const SignIn = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -128,7 +130,7 @@ const SignIn = () => {
             <input 
               type="email" 
               name="email" 
-              className="input input-bordered" 
+              className="input input-bordered pr-12" 
               placeholder="Email"
               required 
             />
@@ -138,13 +140,22 @@ const SignIn = () => {
             <label className="label">
               <span className="label-text">Password</span>
             </label>
-            <input 
-              type="password" 
-              name="password" 
-              className="input input-bordered" 
-              placeholder="Password"
-              required 
-            />
+            <div className="relative w-full">
+              <input 
+                type={showPassword ? "text" : "password"}
+                name="password" 
+                className="input input-bordered  pr-12" 
+                placeholder="Password"
+                required 
+              />
+              <button
+                type="button"
+                className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+              </button>
+            </div>
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
             </label>

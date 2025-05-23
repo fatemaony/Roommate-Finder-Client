@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import { Eye, EyeOff } from "lucide-react";
 
 const SignUp = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { createUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -199,14 +201,32 @@ const SignUp = () => {
             <label className="label">
               <span className="label-text">Password</span>
             </label>
-            <input 
-              type="password" 
-              name="password" 
-              className="input input-bordered" 
-              placeholder="Password (at least 6 characters)"
-              required
-              minLength="6"
-            />
+            <div className="relative">
+              <input 
+                type={showPassword ? "text" : "password"}
+                name="password" 
+                className="input input-bordered  pr-12" 
+                placeholder="Password (at least 6 characters)"
+                required
+                minLength="6"
+                pattern="^(?=.*[a-z])(?=.*[A-Z]).{6,}$"
+                title="Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long"
+              />
+              <button
+                type="button"
+                className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+              </button>
+            </div>
+            <label className="label">
+              <span className="label-text-alt text-xs text-gray-500">
+                • Must have an Uppercase letter<br/>
+                • Must have a Lowercase letter<br/>
+                • Length must be at least 6 characters
+              </span>
+            </label>
           </div>
           
           <div className="form-control mt-6">

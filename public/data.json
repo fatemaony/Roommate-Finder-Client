@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "prime_location": "Banani, Dhaka",
+    "image": "https://t3.ftcdn.net/jpg/02/73/11/96/360_F_273119624_DpYqxwJia1SuX06o3oo2ggIu3oCvKC7O.jpg",
+    "description": "A popular residential and commercial area in Dhaka, known for its vibrant community and modern amenities."
+  },
+  {
+    "id": 2,
+    "prime_location": "Gulshan, Dhaka",
+    "image": "https://t4.ftcdn.net/jpg/02/83/65/75/360_F_283657588_waNr2PH2fyuXRtJTYW4TOgX1XsFn2xyo.jpg",
+    "description": "An upscale neighborhood with embassies, luxury apartments, and a range of high-end restaurants and cafes."
+  },
+  {
+    "id": 3,
+    "prime_location": "Uttara, Dhaka",
+    "image": "https://static.vecteezy.com/system/resources/thumbnails/028/246/009/small_2x/colored-minimalis-living-room-design-simple-fictional-sophisticated-product-design-furniture-design-white-background-generative-ai-photo.jpg",
+    "description": "A well-planned area offering a balance of residential comfort and urban convenience, ideal for families and professionals."
+  }
+]

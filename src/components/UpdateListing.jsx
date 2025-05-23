@@ -73,7 +73,7 @@ const UpdateListing = () => {
   return (
     <div className="px-5 md:px-24 py-10">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-green-900">Update Listing</h2>
+        <h2 className="text-2xl font-bold text-gray-800">Update Listing</h2>
       
       </div>
       
@@ -203,17 +203,13 @@ const UpdateListing = () => {
             />
           </fieldset>
           
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
+          <fieldset className="fieldset bg-base-200 text-gray-500 border-base-300 rounded-box border p-4">
             <label className="label font-medium">Availability*</label>
-            <input 
-              type="text" 
-              name="availability" 
-              className="input input-bordered w-full" 
-              placeholder="When the room is available (e.g. June 1st, 2025)" 
-              value={formData.availability}
-              onChange={handleChange}
-              required 
-            />
+            <select onChange={handleChange} name="availability" className="select bg-white input-bordered w-full" required>
+              <option value="">Select availability</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
           </fieldset>
           
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
@@ -230,7 +226,7 @@ const UpdateListing = () => {
 
           
         </div>
-        <button type="submit" className="btn w-full my-10 bg-green-900 text-white">
+        <button type="submit" className="btn w-full my-10 bg-gray-900 text-white">
             Update Post
           </button>
       </form>

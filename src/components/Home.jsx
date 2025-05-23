@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import HowWorks from "./HowWorks";
-import BrowseListing from "./BrowseListing";
+import Banner from "./Banner";
+import RoommatePost from "./RoommatePost";
  const Home =()=>{
+
+  
   return(
     <div>
-    <div>
-      <p className="text-center text-4xl font-bold text-gray-700 mt-10">
-        Featured Roommates 
-      </p>
-      <BrowseListing/>
+      <Banner/>
+    <div className="m-20">
+  
+      
+       <RoommatePost/>
+      
     </div>
     <HowWorks/>
     </div>
