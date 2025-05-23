@@ -8,7 +8,7 @@ const UpdateListing = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   
-  // Use state to track form values with initial data from the loaded listing
+  
   const [formData, setFormData] = useState({
     userEmail: user?.email || "",
     userName: user?.displayName || "",
@@ -79,7 +79,7 @@ const UpdateListing = () => {
       
       <form onSubmit={handleUpdateListing}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Read-only user email field */}
+          
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">User Email</label>
             <input 
@@ -92,7 +92,7 @@ const UpdateListing = () => {
             <span className="text-xs text-gray-500 mt-1">This field cannot be edited</span>
           </fieldset>
           
-          {/* Read-only user name field */}
+          
           <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
             <label className="label font-medium">User Name </label>
             <input 
@@ -228,10 +228,11 @@ const UpdateListing = () => {
             />
           </fieldset>
 
-          <button type="submit" className="btn w-full my-10 bg-green-900 text-white">
+          
+        </div>
+        <button type="submit" className="btn w-full my-10 bg-green-900 text-white">
             Update Post
           </button>
-        </div>
       </form>
     </div>
   );

@@ -8,11 +8,11 @@ const BrowseListing =()=>{
  return(
   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90%] mx-auto mt-10 shadow">
     {
-      roommates.map(roommate=>(<RoommateCard 
+      roommates.map(roommate=><RoommateCard 
         key={roommate._id}
         roommates={roommates} 
         setRoommates={setRoommates}
-        roommate={roommate} />))
+        roommate={roommate} />)
 
     }
 

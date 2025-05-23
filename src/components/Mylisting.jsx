@@ -1,44 +1,88 @@
-import React, { useContext } from "react";
-import { Link, useLoaderData } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import Swal from 'sweetalert2';
 
 const MyListings = () => {
   const listings = useLoaderData(); 
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const userEmail = user?.email;
-
   
-  const myListings = listings.filter(listing => listing.userEmail === userEmail);
 
-  const handleDelete = () => {
-    Swal.fire({
+  const [currentListings, setCurrentListings] = useState(listings);
+  const [isDeleting, setIsDeleting] = useState(null);
+  const myListings = currentListings.filter(listing => listing.userEmail === userEmail);
+
+  const handleDelete = async (listingId) => {
+    
+    const result = await Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!'
-    })
-    // .then(result =>{
-    //   if (result.isConfirmed) {
-    //     fetch(`http://localhost:3000/roommates/${listings._id}`, {
-    //       method: "DELETE"
-    //     })
-    //     .then(res => res.json())
-    //     .then(data=>{
-    //       console.log(data)
-    //     })
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    });
+    
+    if (!result.isConfirmed) {
+      return;
+    }
+
+    setIsDeleting(listingId);
+
+    try {
+      const response = await fetch(`http://localhost:3000/roommates/${listingId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const deleteResult = await response.json();
+
+      if (response.ok && deleteResult.success) {
         
-    //   }
-    // })
+        setCurrentListings(prevListings => 
+          prevListings.filter(listing => listing._id !== listingId)
+        );
+        
+       
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your listing has been deleted successfully.',
+          icon: 'success',
+          confirmButtonColor: '#3085d6'
+        });
+      } else {
+        
+        Swal.fire({
+          title: 'Error!',
+          text: deleteResult.message || 'Failed to delete listing. Please try again.',
+          icon: 'error',
+          confirmButtonColor: '#3085d6'  
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting listing:", error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'An error occurred while deleting the listing. Please try again.',
+        icon: 'error',
+        confirmButtonColor: '#3085d6'
+      });
+    } finally {
+      setIsDeleting(null);
+    }
   };
 
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">My Roommate Listings</h2>
-        <Link to="/findroommate" className="bg-green-500 text-white px-4 py-2 rounded-md">
+        <Link to="/findroommate" className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">
           Add New Listing
         </Link>
       </div>
@@ -47,7 +91,6 @@ const MyListings = () => {
         <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
           <thead className="bg-gray-100">
             <tr>
-              
               <th className="py-3 px-4 border-b text-left">Location</th>
               <th className="py-3 px-4 border-b text-left">Rent</th>
               <th className="py-3 px-4 border-b text-left">Room Type</th>
@@ -59,7 +102,6 @@ const MyListings = () => {
             {myListings.length > 0 ? (
               myListings.map((listing) => (
                 <tr key={listing._id} className="hover:bg-gray-50">
-                  
                   <td className="py-3 px-4 border-b">{listing.location}</td>
                   <td className="py-3 px-4 border-b">${listing.rent}</td>
                   <td className="py-3 px-4 border-b">{listing.roomType}</td>
@@ -67,15 +109,20 @@ const MyListings = () => {
                   <td className="py-3 px-4 border-b flex justify-center space-x-2">
                     <Link
                       to={`/update/${listing._id}`}
-                      className="bg-blue-500 text-white px-3 py-1 rounded"
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors"
                     >
                       Update
                     </Link>
                     <button
-                      onClick={() => handleDelete()}
-                      className="bg-red-500 text-white px-3 py-1 rounded"
+                      onClick={() => handleDelete(listing._id)}
+                      disabled={isDeleting === listing._id}
+                      className={`px-3 py-1 rounded text-white transition-colors ${
+                        isDeleting === listing._id 
+                          ? 'bg-gray-400 cursor-not-allowed' 
+                          : 'bg-red-500 hover:bg-red-600'
+                      }`}
                     >
-                      Delete
+                      {isDeleting === listing._id ? 'Deleting...' : 'Delete'}
                     </button>
                   </td>
                 </tr>
