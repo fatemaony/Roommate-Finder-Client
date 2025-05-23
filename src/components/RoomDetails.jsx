@@ -1,31 +1,50 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { MdAddIcCall } from "react-icons/md";
 import { useLoaderData } from "react-router";
+import { AuthContext } from "../context/AuthContext"; // assumes you're using Context for auth
 
 const RoomDetails = () => {
   const details = useLoaderData();
+  const { user } = useContext(AuthContext); // get logged-in user
 
-  const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(details.likeCount || 0); 
+  const [liked, setLiked] = useState(
+    details.likedBy?.includes(user?.email) || false
+  );
+  const [likeCount, setLikeCount] = useState(details.likeCount || 0);
 
-  const handleLike = () => {
-    if (!liked) {
-      setLiked(true);
-      setLikeCount(prev => prev + 1);
-      
+  const handleLike = async () => {
+    if (!user?.email || liked) return;
+
+    try {
+      const response = await fetch(`http://localhost:3000/roommates/like/${details._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userEmail: user.email }), // 👈 send email here
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setLiked(true);
+        setLikeCount(data.likeCount);
+      } else {
+        alert(data.message || "Something went wrong");
+      }
+    } catch (error) {
+      console.error("Like request failed:", error);
     }
   };
 
   return (
     <div className="w-[90%] mx-auto my-10 p-4 shadow rounded-lg bg-white">
-    
       <p className="text-lg font-medium text-blue-700 mb-6 text-center md:text-left">
         {likeCount} {likeCount === 1 ? "person is" : "people are"} interested in
       </p>
 
       <div className="flex flex-col md:flex-row gap-6 items-center">
-        {/* Image */}
         <div className="w-full md:w-1/2">
           <img
             className="w-full h-60 object-cover rounded-md"
@@ -43,11 +62,10 @@ const RoomDetails = () => {
           <p className="text-black"><span className="font-semibold">Lifestyle:</span> {details.lifestyle}</p>
           <p className="text-black"><span className="font-semibold">Availability:</span> {details.availability}</p>
 
-        
           <div className="mt-5">
             <button
               onClick={handleLike}
-              
+              disabled={liked}
               className={`flex items-center text-black gap-2 px-4 py-2 border rounded-md transition duration-200 ${
                 liked ? "bg-blue-100 cursor-not-allowed" : "hover:bg-gray-700"
               }`}
@@ -60,7 +78,6 @@ const RoomDetails = () => {
               <span>{liked ? "Liked" : "Like"}</span>
             </button>
 
-         
             {liked && (
               <p className="mt-3 text-sm text-gray-900 flex items-center gap-1">
                 <MdAddIcCall size={18} /> 
