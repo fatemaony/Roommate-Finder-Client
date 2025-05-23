@@ -6,13 +6,15 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDOcUvCHAU3lTl7N3jhAgk8p1tyAwxkibY",
-  authDomain: "roommate-finder-fe424.firebaseapp.com",
-  projectId: "roommate-finder-fe424",
-  storageBucket: "roommate-finder-fe424.firebasestorage.app",
-  messagingSenderId: "182278222548",
-  appId: "1:182278222548:web:6d5498e0001db408b54141"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
+
+console.log("Firebase config:", firebaseConfig); 
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
