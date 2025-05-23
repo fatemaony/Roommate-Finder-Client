@@ -7,7 +7,7 @@ const HowWorks = () => {
     <div className="max-w-6xl mx-auto lg:mx-24 px-4 py-12 mt-20 bg-white rounded-2xl">
       <Fade>
         <h1 className="text-3xl md:text-5xl font-medium text-center text-gray-700 mb-12">
-          How it works
+          About Us
         </h1>
       </Fade>
 
