@@ -68,8 +68,7 @@ const Header = () => {
             <li><Link to="/">Home</Link></li>
             <li>
               <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
-            </li>
-            <li><Link>About</Link></li>
+            </li>           
             <li><Link to="/browselisting">Browse Listing</Link></li>
             
             {user && <li><Link to="/mylisting">My Listings</Link></li>}
@@ -81,10 +80,8 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex lg:items-center">
         <ul className="menu menu-horizontal flex gap-1 font-semibold px-1">
           <li><Link to="/">Home</Link></li>
-          <li>
-            <a href="#About">About Us</a>
-          </li>
-          <li><Link>FAQ</Link></li>
+          
+          
           <li>
             <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
           </li>

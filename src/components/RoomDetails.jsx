@@ -2,41 +2,39 @@ import React, { useContext, useState } from "react";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { MdAddIcCall } from "react-icons/md";
 import { useLoaderData } from "react-router";
-import { AuthContext } from "../context/AuthContext"; // assumes you're using Context for auth
+import { AuthContext } from "../context/AuthContext"; 
 
 const RoomDetails = () => {
   const details = useLoaderData();
-  const { user } = useContext(AuthContext); // get logged-in user
+  const { user } = useContext(AuthContext); 
 
-  const [liked, setLiked] = useState(
-    details.likedBy?.includes(user?.email) || false
-  );
+  const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(details.likeCount || 0);
 
   const handleLike = async () => {
-    if (!user?.email || liked) return;
+  if (!user?.email) return;
 
-    try {
-      const response = await fetch(`http://localhost:3000/roommates/like/${details._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userEmail: user.email }), // 👈 send email here
-      });
+  try {
+    const response = await fetch(`http://localhost:3000/roommates/like/${details._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userEmail: user.email }),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.success) {
-        setLiked(true);
-        setLikeCount(data.likeCount);
-      } else {
-        alert(data.message || "Something went wrong");
-      }
-    } catch (error) {
-      console.error("Like request failed:", error);
+    if (data.success) {
+      setLikeCount(data.likeCount);
+    } else {
+      alert(data.message || "Something went wrong");
     }
-  };
+  } catch (error) {
+    console.error("Like request failed:", error);
+  }
+};
+
 
   return (
     <div className="w-[90%] mx-auto my-10 p-4 shadow rounded-lg bg-white">
