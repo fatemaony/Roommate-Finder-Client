@@ -18,7 +18,7 @@ const Footer = () => {
           </div>
          
 
-          {/* Contact Info */}
+         
           <div className="space-y-4">
             <h3 className="text-xl font-bold">Contact Us</h3>
             <div className="space-y-3 text-gray-400">
@@ -60,7 +60,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
+       
         <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
             © {new Date().getFullYear()} Event Horizon. All rights reserved.

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Banner = () => {
-  // Sample events data - replace with your actual data loading logic
+
   const [events] = useState([
     {
       id: 1,
@@ -27,7 +27,7 @@ const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  // Auto-advance carousel
+  
   useEffect(() => {
     if (!isAutoPlaying) return;
     

@@ -70,13 +70,14 @@ const Header = () => {
               <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
             </li>
             <li><Link to="/browselisting">Browse Listing</Link></li>
+            
             {user && <li><Link to="/mylisting">My Listings</Link></li>}
           </ul>
         </div>
         <Link to="/" className="font-extrabold text-2xl">Roomies</Link>
       </div>
       
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden lg:flex lg:items-center">
         <ul className="menu menu-horizontal flex gap-5 font-semibold px-1">
           <li><Link to="/">Home</Link></li>
           <li>

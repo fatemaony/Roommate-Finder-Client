@@ -6,15 +6,15 @@ const RoommatePost = () => {
   const initialRoommate = useLoaderData();
   const [roommates, setRoommates] = useState(initialRoommate);
   
-  // Filter roommates with availability "yes" and limit to 6
+  
   const availableRoommates = roommates.filter(roommate => roommate.availability === "Yes").slice(0, 6);
   
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-center text-2xl lg:text-4xl font-bold text-black mb-8">
+      <h2 className="text-center text-2xl lg:text-4xl font-bold text-gray-700 mb-8">
         Available Roommates
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-[90%] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
         {
           availableRoommates.map(roommate => 
             <RoommateCard 

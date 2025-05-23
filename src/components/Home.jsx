@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import HowWorks from "./HowWorks";
 import Banner from "./Banner";
 import RoommatePost from "./RoommatePost";
+import FAQ from "./Faq";
  const Home =()=>{
 
   
@@ -15,6 +16,7 @@ import RoommatePost from "./RoommatePost";
       
     </div>
     <HowWorks/>
+   <FAQ/>
     </div>
   )
  };
