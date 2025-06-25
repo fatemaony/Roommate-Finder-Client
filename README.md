@@ -1,12 +1,51 @@
-# React + Vite
+# 🏠 RoommateConnect – Find Your Perfect Roommate!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site URL**: [https://roommateconnect-client.netlify.app](https://famous-tiramisu-4acaab.netlify.app/)
 
-Currently, two official plugins are available:
+## 📌 Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**RoommateConnect** is a full-stack web application that allows users to find compatible roommates based on their preferences, location, budget, and lifestyle. Users can register, add posts, browse listings, and connect with potential roommates through a seamless interface. Built using React, Node.js, MongoDB, Firebase, and Tailwind CSS.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Key Features
+
+- 🔐 **Authentication**: Secure email/password and Google login with protected routes for posting and personal listings.
+- 🏘️ **Roommate Listings**: Users can create, read, update, and delete (CRUD) roommate search posts.
+- 👥 **Personal Dashboard**: View, edit, and delete your own roommate posts in **My Listings**.
+- ❤️ **Interactive Like System**: Like a post to express interest – reveals contact info and counts total likes (excluding self-likes).
+- 📱 **Responsive Design**: Fully optimized for mobile, tablet, and desktop.
+- 🌗 **Dark/Light Mode**: Toggle between dark and light themes easily.
+- 🔄 **Dynamic Home**: Banner slider, featured posts, and engaging extra sections to enhance user experience.
+- 📦 **Tech Stack**: React, Tailwind, Node.js, Express.js, MongoDB, Firebase, DaisyUI, Lottie, React Awesome Reveal, React Tooltip.
+
+---
+
+## 🛠️ Technologies Used
+
+### 🔧 Frontend:
+- React
+- Tailwind CSS + DaisyUI
+- Firebase Authentication
+- React Router DOM
+- Lottie React
+- React Awesome Reveal
+- React Tooltip
+
+### 🔧 Backend:
+- Node.js
+- Express.js
+- MongoDB
+- JWT for secure API access
+- Dotenv for environment variables
+
+---
+
+## 🔒 Environment Variables
+
+All sensitive data like Firebase config and MongoDB URI are stored in `.env` files and excluded from version control using `.gitignore`.
+
+---
+
+## 📁 Project Structure
+
