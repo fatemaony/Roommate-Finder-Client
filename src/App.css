@@ -1,5 +1,60 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+
+  themes: cupcake --default, forest;
+
+}
+
+
+
+@plugin "daisyui/theme" {
+
+  name: "light";
+
+  default: true;
+  
+  --color-secondary:#0B1D51;
+  --color-content:#0B1D51;
+  --color-third:#555879;
+
+}
+
+
+
+@plugin "daisyui/theme" {
+
+  name: "forest";
+
+  color-scheme: dark;
+
+
+}
+
+
+
+@theme {
+
+  --font-aladin: Aladin;
+
+}
+
+
+
+body {
+
+  font-family: poppins;
+
+}
+
+
+
+a.active {
+
+  @apply text-amber-700;
+
+}
+
 
 html{
     scroll-behavior: smooth ;

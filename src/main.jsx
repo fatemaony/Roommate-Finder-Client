@@ -28,28 +28,28 @@ const router = createBrowserRouter([
     children:[
       {
         index:true,
-        loader:()=>fetch("https://roommate-server-kappa.vercel.app/roommates"),
+        loader:()=>fetch("https://server-side-fatemaony.vercel.app/roommates"),
         
         Component:Home
       },
       {
         path:"browselisting",
-        loader:()=>fetch('https://roommate-server-kappa.vercel.app/roommates'),
+        loader:()=>fetch('https://server-side-fatemaony.vercel.app/roommates'),
         Component:BrowseListing
       },
       {
         path:"roommates/:id",
-        loader:({params})=>fetch(`https://roommate-server-kappa.vercel.app/roommates/${params.id}`),
+        loader:({params})=>fetch(`https://server-side-fatemaony.vercel.app/roommates/${params.id}`),
         Component:RoomDetails
       },
       {
         path:"mylisting",
-        loader:({params})=>fetch(`https://roommate-server-kappa.vercel.app/roommates`),
+        loader:({params})=>fetch(`https://server-side-fatemaony.vercel.app/roommates`),
         Component:MyListings
       },
       {
         path:"update/:id",
-        loader:({params})=>fetch(`https://roommate-server-kappa.vercel.app/roommates/${params.id}`),
+        loader:({params})=>fetch(`https://server-side-fatemaony.vercel.app/roommates/${params.id}`),
         Component:UpdateListing
       },
       {

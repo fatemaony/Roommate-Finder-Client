@@ -10,11 +10,11 @@ const RoommatePost = () => {
   const availableRoommates = roommates.filter(roommate => roommate.availability === "Yes").slice(0, 6);
   
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-center text-2xl lg:text-4xl font-bold text-gray-700 mb-8">
+    <div className="container mx-auto">
+      <h2 className="text-center text-2xl lg:text-4xl font-bold text-secondary my-8">
         Available Roommates
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-[90%] mx-auto mt-6 shadow">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto ">
         {
           availableRoommates.map(roommate => 
             <RoommateCard 

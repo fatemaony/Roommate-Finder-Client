@@ -65,31 +65,31 @@ const Header = () => {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
-            <li><Link to="/">Home</Link></li>
-            <li>
+            <li className="text-secondary hover:underline"><Link to="/">Home</Link></li>
+            <li className="text-secondary hover:underline">
               <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
             </li>           
-            <li><Link to="/browselisting">Browse Listing</Link></li>
+            <li className="text-secondary hover:underline"><Link to="/browselisting">Browse Listing</Link></li>
             
-            {user && <li><Link to="/mylisting">My Listings</Link></li>}
+            {user && <li className="text-secondary hover:underline"><Link to="/mylisting">My Listings</Link></li>}
           </ul>
         </div>
-        <Link to="/" className="font-extrabold text-2xl">Roomies</Link>
+        <Link to="/" className="font-bold text-secondary text-2xl">Roomies</Link>
       </div>
       
       <div className="navbar-center hidden lg:flex lg:items-center">
         <ul className="menu menu-horizontal flex gap-1 font-semibold px-1">
-          <li><Link to="/">Home</Link></li>
+          <li className="text-secondary hover:underline"><Link to="/">Home</Link></li>
           
           
-          <li>
+          <li className="text-secondary hover:underline">
             <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
           </li>
           
-          <li><Link to="/browselisting">Browse Listing</Link></li>
+          <li className="text-secondary hover:underline"><Link to="/browselisting">Browse Listing</Link></li>
 
             
-          {user && <li><Link to="/mylisting">My Listings</Link></li>}
+          {user && <li className="text-secondary hover:underline"><Link to="/mylisting">My Listings</Link></li>}
         </ul>
       </div>
       
@@ -140,7 +140,7 @@ const Header = () => {
           {user ? (
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="avatar relative group">
-                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 cursor-pointer">
+                <div className="w-10 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2 cursor-pointer">
                   {user.photoURL ? (
                     <img src={user.photoURL} alt={user.displayName || "User"} />
                   ) : (
@@ -162,14 +162,14 @@ const Header = () => {
                 <li>
                   <Link to="/profile">My Profile</Link>
                 </li>
-                <li className="btn btn-xs mt-2 p-2" onClick={handleLogout}>
-                  <a>Sign Out</a>
+                <li className="btn w-full btn-secondary mt-2 p-2" onClick={handleLogout}>
+                  Sign Out
                 </li>
               </ul>
             </div>
           ) : (
             <Link to="/signin">
-              <button className="btn">Sign In</button>
+              <button className="btn btn-outline btn-secondary">Sign In</button>
             </Link>
           )}
         </div>
