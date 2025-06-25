@@ -47,5 +47,5 @@ All sensitive data like Firebase config and MongoDB URI are stored in `.env` fil
 
 ---
 
-## 📁 Project Structure
+
 
