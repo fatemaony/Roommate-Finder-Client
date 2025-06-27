@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import HowWorks from "./HowWorks";
 import Banner from "./Banner";
 import RoommatePost from "./RoommatePost";
-import FAQ from "./Faq";
+import FAQ from "./MyProfile";
 import About from "./About";
 import Reviews from "./Reviews";
  const Home =()=>{

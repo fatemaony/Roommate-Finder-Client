@@ -10,7 +10,7 @@ const RoommatePost = () => {
   const availableRoommates = roommates.filter(roommate => roommate.availability === "Yes").slice(0, 6);
   
   return (
-    <div className="container mx-auto">
+    <div className="container w-full mx-auto">
       <h2 className="text-center text-2xl lg:text-4xl font-bold text-secondary my-8">
         Available Roommates
       </h2>

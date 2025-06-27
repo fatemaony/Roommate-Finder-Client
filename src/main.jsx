@@ -18,6 +18,7 @@ import ErrorPage from './components/ErrorPage.jsx';
 import MyListings from './components/Mylisting.jsx';
 import UpdateListing from './components/UpdateListing.jsx';
 import ContactUs from './components/ContactUs.jsx';
+import MyProfile from './components/MyProfile.jsx';
 
 
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path:"contactus",
         Component:ContactUs
+      },
+      {
+        path:"profile",
+        Component:MyProfile
       },
       {
         path:"signin",

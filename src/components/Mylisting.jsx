@@ -82,7 +82,7 @@ const MyListings = () => {
     <div className="container mx-auto py-8 mt-20 px-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">My Roommate Listings</h2>
-        <Link to="/findroommate" className="bg-secondary text-white px-4 py-2 rounded-md  transition-colors">
+        <Link to="/findroommate" className="bg-secondary text-white px-4 py-2 rounded-md transition-colors">
           Add New Listing
         </Link>
       </div>

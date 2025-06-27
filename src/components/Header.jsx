@@ -84,12 +84,10 @@ const Header = () => {
         <ul className="menu menu-horizontal flex gap-1 font-semibold px-1">
           <li className="text-secondary hover:underline"><Link to="/">Home</Link></li>
           
-          
-          <li className="text-secondary hover:underline">
-            <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
-          </li>
-          
           <li className="text-secondary hover:underline"><Link to="/browselisting">Browse Listing</Link></li>
+          {user && <li className="text-secondary hover:underline">
+            <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
+          </li>}
           <li className="text-secondary hover:underline"><Link to="/contactus">Contact Us</Link></li>
 
             
@@ -133,9 +131,14 @@ const Header = () => {
               </ul>
             </div>
           ) : (
+            <>
             <Link to="/signin">
               <button className="btn btn-outline btn-secondary">Sign In</button>
             </Link>
+            <Link to="/signup">
+              <button className="btn bg-secondary text-white">Register</button>
+            </Link>
+            </>
           )}
         </div>
       </div>
