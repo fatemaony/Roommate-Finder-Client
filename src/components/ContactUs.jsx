@@ -39,7 +39,7 @@ const ContactUs = () => {
 
   return (
     <motion.div 
-      className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 py-20 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen bg-gradient-to-br from-base-100 to-base-200 py-20 px-4 sm:px-6 lg:px-15"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
