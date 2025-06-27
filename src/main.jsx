@@ -17,6 +17,7 @@ import RoomDetails from './components/RoomDetails.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 import MyListings from './components/Mylisting.jsx';
 import UpdateListing from './components/UpdateListing.jsx';
+import ContactUs from './components/ContactUs.jsx';
 
 
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         path:"update/:id",
         loader:({params})=>fetch(`https://server-side-fatemaony.vercel.app/roommates/${params.id}`),
         Component:UpdateListing
+      },
+      {
+        path:"contactus",
+        Component:ContactUs
       },
       {
         path:"signin",

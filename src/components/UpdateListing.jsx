@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useLoaderData, useNavigate } from "react-router";
 import Swal from 'sweetalert2';
+import { FiHome, FiDollarSign, FiUser, FiMapPin, FiWifi, FiPhone, FiCalendar, FiImage } from "react-icons/fi";
+import { IoIosPeople } from "react-icons/io";
+import { MdOutlineSmokingRooms, MdOutlineNoDrinks } from "react-icons/md";
 
 const UpdateListing = () => {
   const listing = useLoaderData();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  
   
   const [formData, setFormData] = useState({
     userEmail: user?.email || "",
@@ -23,7 +25,6 @@ const UpdateListing = () => {
     photo: listing?.photo || ""
   });
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -35,7 +36,6 @@ const UpdateListing = () => {
   const handleUpdateListing = (e) => {
     e.preventDefault();
     
-    // Send update to db
     fetch(`https://server-side-fatemaony.vercel.app/roommates/${listing._id}`, {
       method: "PUT",
       headers: {
@@ -68,168 +68,248 @@ const UpdateListing = () => {
     });
   };
 
-  
-
   return (
-    <div className="px-5 md:px-24 py-10">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Update Listing</h2>
-      
-      </div>
-      
-      <form onSubmit={handleUpdateListing}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">User Email</label>
-            <input 
-              type="email" 
-              name="userEmail" 
-              className="input input-bordered w-full bg-gray-100" 
-              value={formData.userEmail} 
-              readOnly 
-            />
-            <span className="text-xs text-gray-500 mt-1">This field cannot be edited</span>
-          </fieldset>
-          
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">User Name </label>
-            <input 
-              type="text" 
-              name="userName" 
-              className="input input-bordered w-full bg-gray-100" 
-              value={formData.userName} 
-              readOnly 
-            />
-            <span className="text-xs text-gray-500 mt-1">This field cannot be edited</span>
-          </fieldset>
-
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Location*</label>
-            <input 
-              type="text" 
-              name="location" 
-              className="input input-bordered w-full" 
-              placeholder="City, Neighborhood, etc." 
-              value={formData.location}
-              onChange={handleChange}
-              required 
-            />
-          </fieldset>
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Rent Amount*</label>
-            <input 
-              type="text" 
-              name="rent" 
-              className="input input-bordered w-full" 
-              placeholder="Rent Amount (e.g. $800/month)" 
-              value={formData.rent}
-              onChange={handleChange}
-              required 
-            />
-          </fieldset>
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Room Type</label>
-            <select 
-              name="roomType" 
-              className="select bg-white input-bordered w-full"
-              value={formData.roomType}
-              onChange={handleChange}
+    <div className="px-5 md:px-24 mt-15 py-8 max-w-7xl mx-auto">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden p-6 mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-800">Update Your Listing</h2>
+            <p className="text-gray-600 mt-2">Make changes to your room listing below</p>
+          </div>
+          <div className="mt-4 md:mt-0">
+            <button 
+              onClick={() => navigate(`/roommates/${listing._id}`)} 
+              className="btn btn-outline border-gray-300 hover:bg-gray-100"
             >
-              <option value="Single">Single</option>
-              <option value="Shared">Shared</option>
-              <option value="Studio">Studio</option>
-              <option value="1-Bedroom">1-Bedroom</option>
-              <option value="2-Bedroom">2-Bedroom</option>
-              <option value="Other">Other</option>
-            </select>
-          </fieldset>
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Lifestyle Preferences</label>
-            <select 
-              name="lifestyle" 
-              className="select bg-white input-bordered w-full"
-              value={formData.lifestyle}
-              onChange={handleChange}
-            >
-              <option value="No Preference">No Preference</option>
-              <option value="Pet Friendly">Pet Friendly</option>
-              <option value="No Smoking">No Smoking</option>
-              <option value="Quiet">Quiet</option>
-              <option value="Social">Social</option>
-              <option value="Night Owl">Night Owl</option>
-              <option value="Early Bird">Early Bird</option>
-            </select>
-          </fieldset>
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4 md:col-span-2">
-            <label className="label font-medium">Description*</label>
-            <textarea 
-              name="description" 
-              className="textarea textarea-bordered w-full h-24" 
-              placeholder="Describe yourself, your ideal roommate, and the living situation" 
-              value={formData.description}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </fieldset>
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Amenities</label>
-            <input 
-              type="text" 
-              name="amenities" 
-              className="input input-bordered w-full" 
-              placeholder="Wi-Fi, Parking, Laundry, etc." 
-              value={formData.amenities}
-              onChange={handleChange}
-            />
-          </fieldset>
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Contact Info*</label>
-            <input 
-              type="text"
-              name="contact" 
-              className="input input-bordered w-full" 
-              placeholder="Phone, Email, or preferred contact method" 
-              value={formData.contact}
-              onChange={handleChange}
-              required 
-            />
-          </fieldset>
-          
-          <fieldset className="fieldset bg-base-200 text-gray-500 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Availability*</label>
-            <select onChange={handleChange} name="availability" className="select bg-white input-bordered w-full" required>
-              <option value="">Select availability</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </fieldset>
-          
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box border p-4">
-            <label className="label font-medium">Room Picture</label>
-            <input 
-              type="text" 
-              name="photo" 
-              className="input input-bordered w-full" 
-              placeholder="photo URL" 
-              value={formData.photo}
-              onChange={handleChange}
-            />
-          </fieldset>
-
-          
+              Back to Listing
+            </button>
+          </div>
         </div>
-        <button type="submit" className="btn w-full my-10 bg-gray-900 text-white">
-            Update Post
-          </button>
-      </form>
+      
+        <form onSubmit={handleUpdateListing} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* User Email */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiUser className="text-gray-500" /> User Email
+                </span>
+              </label>
+              <input 
+                type="email" 
+                name="userEmail" 
+                className="input input-bordered w-full bg-gray-50" 
+                value={formData.userEmail} 
+                readOnly 
+              />
+              <span className="text-xs text-gray-500 mt-1 ml-1">This field cannot be edited</span>
+            </div>
+            
+            {/* User Name */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiUser className="text-gray-500" /> User Name
+                </span>
+              </label>
+              <input 
+                type="text" 
+                name="userName" 
+                className="input input-bordered w-full bg-gray-50" 
+                value={formData.userName} 
+                readOnly 
+              />
+              <span className="text-xs text-gray-500 mt-1 ml-1">This field cannot be edited</span>
+            </div>
+
+            {/* Location */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiMapPin className="text-gray-500" /> Location*
+                </span>
+              </label>
+              <input 
+                type="text" 
+                name="location" 
+                className="input input-bordered w-full" 
+                placeholder="City, Neighborhood, etc." 
+                value={formData.location}
+                onChange={handleChange}
+                required 
+              />
+            </div>
+            
+            {/* Rent Amount */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiDollarSign className="text-gray-500" /> Rent Amount*
+                </span>
+              </label>
+              <input 
+                type="text" 
+                name="rent" 
+                className="input input-bordered w-full" 
+                placeholder="Rent Amount (e.g. $800/month)" 
+                value={formData.rent}
+                onChange={handleChange}
+                required 
+              />
+            </div>
+            
+            {/* Room Type */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiHome className="text-gray-500" /> Room Type
+                </span>
+              </label>
+              <select 
+                name="roomType" 
+                className="select select-bordered w-full"
+                value={formData.roomType}
+                onChange={handleChange}
+              >
+                <option value="Single">Single</option>
+                <option value="Shared">Shared</option>
+                <option value="Studio">Studio</option>
+                <option value="1-Bedroom">1-Bedroom</option>
+                <option value="2-Bedroom">2-Bedroom</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            
+            {/* Lifestyle Preferences */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <IoIosPeople className="text-gray-500" /> Lifestyle Preferences
+                </span>
+              </label>
+              <select 
+                name="lifestyle" 
+                className="select select-bordered w-full"
+                value={formData.lifestyle}
+                onChange={handleChange}
+              >
+                <option value="No Preference">No Preference</option>
+                <option value="Pet Friendly">Pet Friendly</option>
+                <option value="No Smoking">No Smoking</option>
+                <option value="Quiet">Quiet</option>
+                <option value="Social">Social</option>
+                <option value="Night Owl">Night Owl</option>
+                <option value="Early Bird">Early Bird</option>
+              </select>
+            </div>
+            
+            {/* Description */}
+            <div className="form-control md:col-span-2">
+              <label className="label">
+                <span className="label-text font-medium">Description*</span>
+              </label>
+              <textarea 
+                name="description" 
+                className="textarea textarea-bordered w-full h-32" 
+                placeholder="Describe yourself, your ideal roommate, and the living situation" 
+                value={formData.description}
+                onChange={handleChange}
+                required
+              ></textarea>
+            </div>
+            
+            {/* Amenities */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiWifi className="text-gray-500" /> Amenities
+                </span>
+              </label>
+              <input 
+                type="text" 
+                name="amenities" 
+                className="input input-bordered w-full" 
+                placeholder="Wi-Fi, Parking, Laundry, etc." 
+                value={formData.amenities}
+                onChange={handleChange}
+              />
+            </div>
+            
+            {/* Contact Info */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiPhone className="text-gray-500" /> Contact Info*
+                </span>
+              </label>
+              <input 
+                type="text"
+                name="contact" 
+                className="input input-bordered w-full" 
+                placeholder="Phone, Email, or preferred contact method" 
+                value={formData.contact}
+                onChange={handleChange}
+                required 
+              />
+            </div>
+            
+            {/* Availability */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiCalendar className="text-gray-500" /> Availability*
+                </span>
+              </label>
+              <select 
+                onChange={handleChange} 
+                name="availability" 
+                className="select select-bordered w-full" 
+                required
+                value={formData.availability}
+              >
+                <option value="">Select availability</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            
+            {/* Room Picture */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium flex items-center gap-2">
+                  <FiImage className="text-gray-500" /> Room Picture
+                </span>
+              </label>
+              <input 
+                type="text" 
+                name="photo" 
+                className="input input-bordered w-full" 
+                placeholder="Photo URL" 
+                value={formData.photo}
+                onChange={handleChange}
+              />
+              {formData.photo && (
+                <div className="mt-2">
+                  <img 
+                    src={formData.photo} 
+                    alt="Current room preview" 
+                    className="h-24 object-cover rounded-md border border-gray-200"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+          
+          <div className="flex justify-end mt-10">
+            <button 
+              type="submit" 
+              className="btn btn-primary w-full md:w-auto px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-800 text-white hover:from-blue-700 hover:to-blue-900"
+            >
+              Update Listing
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

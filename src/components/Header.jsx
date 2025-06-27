@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import { FcHome } from "react-icons/fc";
 import Swal from "sweetalert2";
 
 const Header = () => {
@@ -54,7 +55,7 @@ const Header = () => {
   };
   
   return (
-    <div className="navbar bg-base-100 shadow-sm px-10">
+    <div className="navbar bg-base-200 shadow-sm px-10 fixed top-0 left-0 right-0 z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -66,15 +67,17 @@ const Header = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
             <li className="text-secondary hover:underline"><Link to="/">Home</Link></li>
+            <li className="text-secondary hover:underline"><Link to="/contactus">Contact Us</Link></li>
             <li className="text-secondary hover:underline">
               <Link to="/findroommate" onClick={handleFindRoommateClick}>Find Roommate</Link>
             </li>           
             <li className="text-secondary hover:underline"><Link to="/browselisting">Browse Listing</Link></li>
             
+            
             {user && <li className="text-secondary hover:underline"><Link to="/mylisting">My Listings</Link></li>}
           </ul>
         </div>
-        <Link to="/" className="font-bold text-secondary text-2xl">Roomies</Link>
+        <Link to="/" className="font-bold flex items-center gap-1 text-secondary text-2xl"> <FcHome size={25} />Roomies</Link>
       </div>
       
       <div className="navbar-center hidden lg:flex lg:items-center">
@@ -87,6 +90,7 @@ const Header = () => {
           </li>
           
           <li className="text-secondary hover:underline"><Link to="/browselisting">Browse Listing</Link></li>
+          <li className="text-secondary hover:underline"><Link to="/contactus">Contact Us</Link></li>
 
             
           {user && <li className="text-secondary hover:underline"><Link to="/mylisting">My Listings</Link></li>}
@@ -95,46 +99,7 @@ const Header = () => {
       
       <div className="navbar-end">
         <div className="flex items-center gap-3">
-          
-          <button 
-            onClick={toggleTheme}
-            className="btn btn-ghost btn-circle hover:bg-base-200 transition-colors duration-200"
-            aria-label="Toggle theme"
-          >
-            {isDark ? (
-             
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 text-yellow-500" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" 
-                />
-              </svg>
-            ) : (
-              
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 text-blue-600" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" 
-                />
-              </svg>
-            )}
-          </button>
+     
          
           
           {user ? (

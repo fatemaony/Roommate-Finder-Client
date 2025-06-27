@@ -52,7 +52,7 @@ const RoommateCard = ({ roommate, roommates, setRoommates }) => {
         </p>
 
         <p className="flex items-center gap-2 text-gray-700 mb-4">
-          <FaMoneyBillWave className="text-yellow-500" /> <span className="font-bold">Rent:</span> {rent} Tk
+          <FaMoneyBillWave className="text-yellow-500" /> <span className="font-bold">Rent:</span> ${rent}
         </p>
 
         <div className="card-actions justify-end">
